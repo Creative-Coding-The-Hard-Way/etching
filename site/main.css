@@ -112,16 +112,26 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  padding: 0.5em;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.sketch_header:hover {
-  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
 }
 
 .sketch_header a {
   text-decoration: none;
   font-size: 1.5em;
   color: var(--moonstone);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.5rem;
+}
+
+.sketch_header a:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#new_seed {
+  align-self: flex-end;
 }
