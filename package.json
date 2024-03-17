@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "develop": "npx @11ty/eleventy && parcel",
+    "develop": "npx @11ty/eleventy && parcel --public-url /etching",
     "build": "npx @11ty/eleventy && parcel build",
     "check": "tsc --noEmit",
     "lint": "eslint",

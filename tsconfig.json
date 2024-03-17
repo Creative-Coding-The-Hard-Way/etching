@@ -7,7 +7,8 @@
     "baseUrl": ".",
     "paths": {
       "~*": ["./*"]
-    }
+    },
+    "moduleResolution": "NodeNext"
   },
   "include": [
     "src/**/*"
