@@ -19,6 +19,8 @@ module.exports = function (config) {
     return sketches;
   });
 
+  config.addPassthroughCopy("assets/fonts");
+
   return {
     dir: {
       input: "site",
