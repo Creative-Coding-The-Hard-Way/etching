@@ -134,15 +134,16 @@ new Page("Blossom", (p5: P5) => {
     p5.color(289, 15, 55),
     p5.color(332, 30, 65),
   ];
-  const sketch = new Sketch(p5, {
+  let sketch = new Sketch(p5, {
     width: 800,
     height: 1000,
     margin: 50,
   });
-  const { w, h, scene } = sketch.layout;
+  let { w, h, scene } = sketch.layout;
 
   p5.preload = () => sketch.assets.load_special_elite();
   p5.setup = () => p5.createCanvas(w, h);
+  p5.windowResized = () => location.reload();
 
   p5.draw = () => {
     p5.background(sketch.palette.old_paper());
@@ -153,7 +154,7 @@ new Page("Blossom", (p5: P5) => {
       blossom(p5, {
         x: p5.random(scene.left + offset, scene.right - offset),
         y: p5.random(scene.top + offset, scene.bottom - offset),
-        size: p5.random(100, 250),
+        size: p5.random(sketch.layout.em * 8, sketch.layout.em * 16),
         stroke_color: sketch.palette.gunmetal(),
         petal_color: p5.random(flower_colors),
       });

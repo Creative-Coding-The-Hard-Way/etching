@@ -10,6 +10,7 @@ export interface AxisAlignedRect {
 }
 
 export interface Layout extends AxisAlignedRect {
+  readonly em: number;
   readonly margin: number;
   readonly scene: AxisAlignedRect;
 }
@@ -21,7 +22,24 @@ export interface SceneParams {
 }
 
 export function compute_layout(params: SceneParams): Layout {
-  const { width, height, margin } = params;
+  let { width, height, margin } = params;
+  const aspect = width / height;
+  const margin_ratio = margin / Math.max(width, height);
+
+  // re-compute the width and height such that the height
+  // is constrained by the window height
+  if (height > window.innerHeight) {
+    height = window.innerHeight;
+    width = height * aspect;
+  }
+
+  if (width > window.innerWidth) {
+    width = window.innerWidth;
+    height = width / aspect;
+  }
+
+  margin = margin_ratio * Math.max(width, height);
+
   return {
     margin,
     w: width,
@@ -42,5 +60,6 @@ export function compute_layout(params: SceneParams): Layout {
       center_x: width / 2,
       center_y: height / 2,
     },
+    em: Math.min(width, height) / 50,
   };
 }
