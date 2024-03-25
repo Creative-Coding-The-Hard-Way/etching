@@ -43,8 +43,8 @@ function plant(p5: P5, level: number, params: PlantParams) {
     // draw the stem outline
     p5.stroke(params.ink_color);
     p5.strokeWeight(3);
-    p5.line(3, 0, 2, stem_length);
-    p5.line(-3, 0, -2, stem_length);
+    p5.line(3, 0, 2.5, stem_length);
+    p5.line(-3, 0, -2.5, stem_length);
 
     if (level < 3 && params.max_branches > 0) {
       if (p5.random() > 0.75) {
