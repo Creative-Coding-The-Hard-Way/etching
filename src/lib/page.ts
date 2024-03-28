@@ -62,6 +62,7 @@ export class Page {
     const root = document.getElementById("sketch_root")!;
     this.p5 = new P5((p5: P5) => {
       p5.randomSeed(hash_code(get_current_seed()));
+      p5.noiseSeed(hash_code(get_current_seed()));
       return sketch(p5);
     }, root);
 

@@ -1,7 +1,8 @@
 import { Page } from "~/src/lib/page";
 import { pushpop } from "~/src/lib/p5_state";
 import { Sketch } from "~/src/lib/sketch";
-import { blossom } from "~/src/sketches/p2/00_blossom/blossom";
+import { blossom } from "./blossom";
+import { Pen } from "~/src/lib/pen";
 import P5 from "p5";
 
 interface PlantParams {
@@ -10,6 +11,9 @@ interface PlantParams {
   ink_color: P5.Color;
   max_branches: number;
   petal_color: P5.Color;
+  thick_pen: Pen;
+  petal_pen: Pen;
+  detail_pen: Pen;
 }
 
 function plant(p5: P5, level: number, params: PlantParams) {
@@ -21,6 +25,8 @@ function plant(p5: P5, level: number, params: PlantParams) {
       stroke_color: params.ink_color,
       petal_color: params.petal_color,
       petal_count: 6,
+      detail_pen: params.detail_pen,
+      thick_pen: params.petal_pen,
     });
     return;
   }
@@ -43,8 +49,8 @@ function plant(p5: P5, level: number, params: PlantParams) {
     // draw the stem outline
     p5.stroke(params.ink_color);
     p5.strokeWeight(3);
-    p5.line(3, 0, 2.5, stem_length);
-    p5.line(-3, 0, -2.5, stem_length);
+    params.thick_pen.line(3, 0, 2.5, stem_length);
+    params.thick_pen.line(-3, 0, -2.5, stem_length);
 
     if (level < 3 && params.max_branches > 0) {
       if (p5.random() > 0.75) {
@@ -75,6 +81,9 @@ new Page("Plant", (p5: P5) => {
     margin: 50,
   });
   const { w, h, scene } = sketch.layout;
+  const thick_pen = new Pen(p5, { jitter: 0.15, weight: 3 });
+  const petal_pen = new Pen(p5, { jitter: 0.5, weight: 2.3 });
+  const detail_pen = new Pen(p5, { jitter: 0.9, weight: 0.8 });
 
   p5.colorMode(p5.HSL);
   const flower_colors = [
@@ -110,6 +119,9 @@ new Page("Plant", (p5: P5) => {
           ink_color: sketch.palette.gunmetal(),
           max_branches: 4,
           petal_color: p5.random(flower_colors),
+          thick_pen,
+          detail_pen,
+          petal_pen,
         });
       });
     }
@@ -118,7 +130,7 @@ new Page("Plant", (p5: P5) => {
     pushpop(p5, () => {
       p5.strokeWeight(3);
       p5.stroke(sketch.palette.gunmetal());
-      p5.line(scene.left, horizon, scene.right, horizon);
+      thick_pen.line(scene.left, horizon, scene.right, horizon);
     });
 
     // draw the seed
