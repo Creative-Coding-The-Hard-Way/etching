@@ -20,6 +20,7 @@ module.exports = function (config) {
   });
 
   config.addPassthroughCopy("assets/fonts");
+  config.addPassthroughCopy("assets/brushes");
 
   return {
     dir: {

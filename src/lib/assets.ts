@@ -33,4 +33,8 @@ export class Assets {
     }
     return this.special_elite;
   }
+
+  load_image(asset_path: string): P5.Image {
+    return this.p5.loadImage(`${ASSET_PATH}/${asset_path}`);
+  }
 }

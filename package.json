@@ -18,7 +18,8 @@
   },
   "source": [
     "e11ty_dist/index.html",
-    "e11ty_dist/assets/fonts/SpecialElite.ttf"
+    "e11ty_dist/assets/fonts/SpecialElite.ttf",
+    "e11ty_dist/assets/brushes/ink-pen.png"
   ],
   "targets": {
     "default": {
